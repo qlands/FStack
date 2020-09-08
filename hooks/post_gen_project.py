@@ -19,12 +19,15 @@ def display_actions_message():
                 
         Change directory into your newly created project.
             cd {{ cookiecutter.project_name }}
+            
+        Install all dependencies.
+            pip install -r ./requirements.txt
 
         Build the project
             python setup.py develop
             
         Create an initial configuration
-            create_config --mysql_host=localhost --mysql_schema={{ cookiecutter.project_name }} --mysql_user_name=root --mysql_user_password=carlos ./config.ini 
+            create_config --mysql_host=localhost --mysql_schema={{ cookiecutter.project_name }} --mysql_user_name=root --mysql_user_password=[my_secure_password] ./config.ini 
 
         Create a schema called {{ cookiecutter.project_name }} in the MySQL server
         
