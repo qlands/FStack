@@ -28,11 +28,8 @@ auth.secret = {{ auth_secret }}
 aes.key = {{ aes_key }}
 redis.sessions.secret = {{ redis_sessions_secret }}
 {% endraw %}
-
 redis.sessions.timeout = 7200
-{% raw %}
 redis.sessions.cookie_name = {{ cookiecutter.project_name }}_session
-{% endraw %}
 redis.sessions.host = localhost
 redis.sessions.port = 6379
 
