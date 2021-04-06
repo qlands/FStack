@@ -3,7 +3,7 @@
 
 [CKAN]( https://ckan.org/) is an excellent example of a Web application that can be extended or customized using plug-ins. It relies on [PyUtilib Component Architecture]( https://pypi.python.org/pypi/PyUtilib) (PCA) to declare a series of interfaces and extension points that then are used by plug-ins to hook in. It also implements a series of [Jinja2]( http://jinja.pocoo.org/) extension (notably CKAN_EXTENDS) that allows easily template inheritance between CKAN and connected plug-ins.
 
-During the development of  [FormShare](https://github.com/qlands/FormShare) , [ClimMob](https://climmob.net/blog/) and other tools we borrowed certain concepts and code from CKAN to create a series of technologies to make FormShare a extensible and pluggable Web Application. These technologies are now stacked in FormShare Stack (FStack).
+During the development of  [FormShare](https://github.com/qlands/FormShare) , [ClimMob](https://climmob.net/blog/) and other tools we borrowed certain concepts and code from CKAN to create a series of technologies to make these Web Application extensible and pluggable. These technologies are now stacked in FormShare Stack (FStack).
 
 FStack is a CookieCutter template to create scaffolding for scalable and pluggable Web Applications. It can can be used as a starting point to develop more complex Web Applications. The resulting project will have:
 
