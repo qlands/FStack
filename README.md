@@ -17,7 +17,16 @@ FStack is a CookieCutter template to create scaffolding for scalable and pluggab
  - [AdminLTE](https://adminlte.io) (3.0.5) HTML template system
  - User registration and login using MySQL
 
-## Usage
+## Requirements
+
+FormShare stack depends on MySQL, Redis and Python
+
+```sh
+# On Ubuntu 20.04
+sudo apt-get install -y redis-server mysql-server python3.8-venv
+```
+
+## How to create a FStack project
 
 ```shell
 python3 -m venv myproject_env
@@ -26,5 +35,18 @@ pip install cookiecutter
 cookiecutter https://github.com/qlands/fstack
 ```
 
+## Notes
 
+- The FStack CookieCutter assumes that your MySQL server root account has a password. If your account does not have a password then edit the config.ini file to remove the colons (:) between the user the password. The same for alembic.ini and run again "alembic upgrade head"
 
+  ```ini
+  sqlalchemy.url = mysql+mysqlconnector://root@localhost/test_project?charset=utf8&ssl_disabled=True
+  ```
+
+- In some Linux distributions MySQL cannot connect to localhost but to 127.0.0.1. If you get a connexion refused edit the config.ini file to change localhost to 127.0.0.1. The same for alembic.ini and run again "alembic upgrade head"
+
+  ```ini
+  sqlalchemy.url = mysql+mysqlconnector://root@127.0.0.1/test_project?charset=utf8&ssl_disabled=True
+  ```
+
+  
