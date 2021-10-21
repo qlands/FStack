@@ -3,9 +3,9 @@
 
 [CKAN]( https://ckan.org/) is an excellent example of a Web application that can be extended or customized using plug-ins. It relies on [PyUtilib Component Architecture]( https://pypi.python.org/pypi/PyUtilib) (PCA) to declare a series of interfaces and extension points that then are used by plug-ins to hook in. It also implements a series of [Jinja2]( http://jinja.pocoo.org/) extension (notably CKAN_EXTENDS) that allows easily template inheritance between CKAN and connected plug-ins.
 
-During the development of [FormShare](https://github.com/qlands/FormShare), [ClimMob](https://climmob.net/blog/), and other tools we borrowed certain concepts and code from CKAN to create a series of technologies to make these Web Application extensible and pluggable. These technologies are now stacked in FormShare Stack (FStack).
+During the development of [FormShare](https://github.com/qlands/FormShare), [ClimMob](https://climmob.net/blog/), and other tools we borrowed certain concepts and code from CKAN to create a series of technologies to make these Pyramid Web Applications extensible and pluggable. These technologies are now stacked in FormShare Stack (FStack).
 
-FStack is a CookieCutter template to create scaffolding for scalable and pluggable Web Applications. It can can be used as a starting point to develop more complex Web Applications. The resulting project will have:
+FStack is a CookieCutter template to create scaffolding for scalable and pluggable Pyramid Web Applications. It can be used as a starting point to develop more complex Pyramid Web Applications. The resulting project will have:
 
 - Easy JS and CSS resource declaration and injection using Jinja2 Tags
 - Database migrations using Alembic
@@ -15,7 +15,7 @@ FStack is a CookieCutter template to create scaffolding for scalable and pluggab
    - Adding and injecting new static resources
    - Adding and injecting new JS or CSS resources
  - [AdminLTE](https://adminlte.io) (3.0.5) HTML template system
- - User registration and login using MySQL
+ - Basic user registration and login using MySQL with password encryption using Fernet
 
 ## Requirements
 
