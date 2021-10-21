@@ -19,20 +19,33 @@ FStack is a CookieCutter template to create scaffolding for scalable and pluggab
 
 ## Requirements
 
-FormShare stack depends on MySQL, Redis and Python
+FormShare stack depends on MySQL, Redis and Python VirtualEnv
 
 ```sh
 # On Ubuntu 20.04
-sudo apt-get install -y redis-server mysql-server python3.8-venv
+sudo apt-get install -y redis-server mysql-server python3.8-venv mysql-client-core-8.0 
 ```
 
 ## How to create a FStack project
 
-```shell
+```sh
 python3 -m venv myproject_env
 . ./myproject_env/bin/activate
 pip install cookiecutter
 cookiecutter https://github.com/qlands/fstack
+# Cookicutter will ask you the details of your project. For example project_name
+cd [project_name]
+# Install requirements
+pip install -r ./requirements.txt
+python setup.py develop
+# Create an initial configuration. Change all [parameters] as appropiate
+create_config --mysql_host=[mysql_host] --mysql_schema=[project_name] --mysql_user_name=[mysql_user] --mysql_user_password=[my_secure_password] ./config.ini
+# Create a MySQL schema for your project
+mysql -u [mysql_user] -p --execute='CREATE SCHEMA [project_name]'
+# Create the initial schema
+alembic upgrade head
+# Run your FStack App
+pserve ./config.ini
 ```
 
 ## Notes
