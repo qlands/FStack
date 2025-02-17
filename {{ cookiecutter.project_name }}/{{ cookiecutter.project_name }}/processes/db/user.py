@@ -40,17 +40,18 @@ def register_user(request, user_data):
             .first()
         )
         if res is None:
+            save_point = request.tm.savepoint()
             new_user = User(**mapped_data)
             try:
                 request.dbsession.add(new_user)
                 request.dbsession.flush()
                 return True, ""
             except IntegrityError:
-                request.dbsession.rollback()
+                save_point.rollback()
                 log.error("Duplicated user {}".format(mapped_data["user_id"]))
                 return False, _("Username is already taken")
             except Exception as e:
-                request.dbsession.rollback()
+                save_point.rollback()
                 log.error(
                     "Error {} when inserting user {}".format(
                         str(e), mapped_data["user_id"]
@@ -143,17 +144,19 @@ def get_user_id_with_email(request, email):
 
 def update_profile(request, user, profile_data):
     mapped_data = map_to_schema(User, profile_data)
+    save_point = request.tm.savepoint()
     try:
         request.dbsession.query(User).filter(User.user_id == user).update(mapped_data)
         request.dbsession.flush()
         return True, ""
     except Exception as e:
-        request.dbsession.rollback()
+        save_point.rollback()
         log.error("Error {} when updating user {}".format(str(e), user))
         return False, str(e)
 
 
 def update_last_login(request, user):
+    save_point = request.tm.savepoint()
     try:
         request.dbsession.query(User).filter(User.user_id == user).update(
             {"user_llogin": datetime.datetime.now()}
@@ -161,7 +164,7 @@ def update_last_login(request, user):
         request.dbsession.flush()
         return True, ""
     except Exception as e:
-        request.dbsession.rollback()
+        save_point.rollback()
         log.error("Error {} when updating last login for user {}".format(str(e), user))
         return False, str(e)
 
@@ -180,6 +183,7 @@ def get_user_by_api_key(request, api_key):
 
 
 def update_password(request, user, password):
+    save_point = request.tm.savepoint()
     try:
         request.dbsession.query(User).filter(User.user_id == user).update(
             {"user_password": password}
@@ -187,6 +191,6 @@ def update_password(request, user, password):
         request.dbsession.flush()
         return True, ""
     except Exception as e:
-        request.dbsession.rollback()
+        save_point.rollback()
         log.error("Error {} when changing password for user {}".format(str(e), user))
         return False, str(e)
